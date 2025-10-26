@@ -9,7 +9,7 @@ const customOptionsWrapper = document.querySelector('.options__wrapper');
 
 // function that handles open and close state of custom select
 function customSelectClickHandler() {
-    // toggle 'show' class. initially options wrapper is with 'display: none' and .show class changes it to 'display: block'
+    // toggle 'show' class to show / hide the select options
     customOptionsWrapper.classList.toggle('show')
 }
 

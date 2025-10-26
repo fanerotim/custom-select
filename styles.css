@@ -42,13 +42,18 @@ span {
 }
 
 .options__wrapper {
-    border: 1px solid rgb(22, 21, 21);
     padding: .5rem 1.2rem;
     height: 80px;
     overflow-y: scroll;
     border-radius: .5rem;
     background-color: beige;
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    /* visibility's transition is longer to make sure the dropdown is hidden before it makes it impossible to interact with */
+    transition: opacity .3s, visibility .4s;
+    /* We can transition height and opacity as another way to implement smooth open / closed state of select options */
+    /* height: 0px;
+    transition: opacity .3s, height .1s; */
 }
 
 .option {
@@ -68,5 +73,12 @@ span {
 }
 
 .show {
-    display: block;
+    visibility: visible;
+    opacity: 1;
 }
+
+/* Another option to implement smooth open / close states of select is to transition height and opacity */
+/* .show {
+    height: 80px;
+    opacity: 1;
+} */
