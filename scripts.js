@@ -20,23 +20,19 @@ function customSelectClickHandler() {
     }
 }
 
-// get all options in a NodeList
-const optionElements = document.querySelectorAll('.option');
-
-// attach an event listener to each option
-optionElements.forEach(o => o.addEventListener('click', handleOptionChange))
-
 // custom__select paragraph
 let customSelectElement = document.querySelector('.custom__select');
 
-// change custom select value upon option change
-function handleOptionChange() {
-    // update custom__select paragraph to match the value of the selected / clicked option
-    // 1. get value of current select option
-    const currentOption = this.textContent;
-    // update value of custom select
-    customSelectElement.textContent = currentOption;
+// use event delegation approach to only add one event listener to wrapper
+customOptionsWrapper.addEventListener('click', handleOptionChange);
 
+// change custom select value upon option change
+function handleOptionChange(e) {
+    // identify the current option by checking e.target (thanks to event delegation)
+    const currentOption = e.target;
+
+    // update custom select text with the text of the custom option
+    customSelectElement.textContent = currentOption.textContent;
     // call customSelectClickHandler to close the option list
     customSelectClickHandler();
 }
