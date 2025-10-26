@@ -2,7 +2,7 @@
 const customSelectBtn = document.querySelector('.custom__select');
 
 // add event listener to custom select element, so we can show hide the options
-customSelectBtn.addEventListener('click', customSelectClickHandler)
+customSelectBtn?.addEventListener('click', customSelectClickHandler)
 
 // get custom options wrapper
 const customOptionsWrapper = document.querySelector('.options__wrapper');
@@ -24,13 +24,12 @@ function customSelectClickHandler() {
 let customSelectElement = document.querySelector('.custom__select');
 
 // use event delegation approach to only add one event listener to wrapper
-customOptionsWrapper.addEventListener('click', handleOptionChange);
+customOptionsWrapper?.addEventListener('click', handleOptionChange);
 
 // change custom select value upon option change
 function handleOptionChange(e) {
     // identify the current option by checking e.target (thanks to event delegation)
     const currentOption = e.target;
-
     // update custom select text with the text of the custom option
     customSelectElement.textContent = currentOption.textContent;
     // call customSelectClickHandler to close the option list
