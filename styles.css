@@ -48,6 +48,7 @@ span {
     overflow-y: scroll;
     border-radius: .5rem;
     background-color: beige;
+    display: none;
 }
 
 .option {
@@ -68,8 +69,4 @@ span {
 
 .show {
     display: block;
-}
-
-.hide {
-    display: none;
 }

@@ -9,15 +9,8 @@ const customOptionsWrapper = document.querySelector('.options__wrapper');
 
 // function that handles open and close state of custom select
 function customSelectClickHandler() {
-    // if options are hidden show them by toggling '.hide' and '.show' classes
-    if (customOptionsWrapper.className.includes('hide')) {
-        customOptionsWrapper.classList.remove('hide');
-        customOptionsWrapper.classList.add('show')
-    // opposite of above: hide options 
-    } else {
-        customOptionsWrapper.classList.remove('show');
-        customOptionsWrapper.classList.add('hide');
-    }
+    // toggle 'show' class. initially options wrapper is with 'display: none' and .show class changes it to 'display: block'
+    customOptionsWrapper.classList.toggle('show')
 }
 
 // custom__select paragraph
@@ -42,7 +35,7 @@ function handleOptionChange(e) {
 const formSubmitButton = document.querySelector('.submit__btn');
 
 // add event listener to the submit button
-formSubmitButton.addEventListener('click', submitFormHandler)
+formSubmitButton?.addEventListener('click', submitFormHandler)
 
 function submitFormHandler(e) {
     e.preventDefault();
