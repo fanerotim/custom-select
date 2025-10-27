@@ -1,3 +1,17 @@
+// array that holds book titles that will be used in the different options
+const bookTitles = [
+    'Anima',
+    'Border',
+    'To the Lake',
+    'Elixir',
+    'Out of Thin Air',
+    'The Sweet Soirt',
+    'It`s not about the bike',
+    'Perfume',
+    'On the road',
+    'Glue'
+];
+
 // get custom select element
 const customSelectBtn = document.querySelector('.custom__select');
 
@@ -7,15 +21,26 @@ customSelectBtn?.addEventListener('click', customSelectClickHandler)
 // get custom options wrapper
 const customOptionsWrapper = document.querySelector<HTMLElement>('.options__wrapper');
 
+const arrowUpElement = document.querySelector<HTMLSpanElement>('.arrow__up');
+const arrowDownElement = document.querySelector<HTMLSpanElement>('.arrow__down');
+
 // function that handles open and close state of custom select
 function customSelectClickHandler() {
 
     if (!customOptionsWrapper) {
         throw Error('Options Wrapper does not exist!');
     }
-
+    
     // toggle 'show' class to show / hide the select options
     customOptionsWrapper.classList.toggle('show')
+
+    if (customOptionsWrapper.classList.contains('show')) {
+        arrowUpElement!.style.display = 'inline-block';
+        arrowDownElement!.style.display = 'none'
+    } else {
+        arrowUpElement!.style.display = 'none';
+        arrowDownElement!.style.display = 'inline-block'
+    }
 }
 
 // custom__select paragraph
@@ -56,20 +81,6 @@ function submitFormHandler(e: Event) {
     // log value of selected option - it is basically the textContent of customSelectElement
     console.log(customSelectElement.textContent);
 }
-
-// array that holds book titles that will be used in the different options
-const bookTitles = [
-    'Anima',
-    'Border',
-    'To the Lake',
-    'Elixir',
-    'Out of Thin Air',
-    'The Sweet Soirt',
-    'It`s not about the bike',
-    'Perfume',
-    'On the road',
-    'Glue'
-];
 
 // function that generates options on initial page load and when bookTitiles array changes
 function createAndAttachOptions() {

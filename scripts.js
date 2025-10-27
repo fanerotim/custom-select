@@ -1,9 +1,24 @@
+// array that holds book titles that will be used in the different options
+var bookTitles = [
+    'Anima',
+    'Border',
+    'To the Lake',
+    'Elixir',
+    'Out of Thin Air',
+    'The Sweet Soirt',
+    'It`s not about the bike',
+    'Perfume',
+    'On the road',
+    'Glue'
+];
 // get custom select element
 var customSelectBtn = document.querySelector('.custom__select');
 // add event listener to custom select element, so we can show hide the options
 customSelectBtn === null || customSelectBtn === void 0 ? void 0 : customSelectBtn.addEventListener('click', customSelectClickHandler);
 // get custom options wrapper
 var customOptionsWrapper = document.querySelector('.options__wrapper');
+var arrowUpElement = document.querySelector('.arrow__up');
+var arrowDownElement = document.querySelector('.arrow__down');
 // function that handles open and close state of custom select
 function customSelectClickHandler() {
     if (!customOptionsWrapper) {
@@ -11,6 +26,14 @@ function customSelectClickHandler() {
     }
     // toggle 'show' class to show / hide the select options
     customOptionsWrapper.classList.toggle('show');
+    if (customOptionsWrapper.classList.contains('show')) {
+        arrowUpElement.style.display = 'inline-block';
+        arrowDownElement.style.display = 'none';
+    }
+    else {
+        arrowUpElement.style.display = 'none';
+        arrowDownElement.style.display = 'inline-block';
+    }
 }
 // custom__select paragraph
 var customSelectElement = document.querySelector('.custom__select');
@@ -41,19 +64,6 @@ function submitFormHandler(e) {
     // log value of selected option - it is basically the textContent of customSelectElement
     console.log(customSelectElement.textContent);
 }
-// array that holds book titles that will be used in the different options
-var bookTitles = [
-    'Anima',
-    'Border',
-    'To the Lake',
-    'Elixir',
-    'Out of Thin Air',
-    'The Sweet Soirt',
-    'It`s not about the bike',
-    'Perfume',
-    'On the road',
-    'Glue'
-];
 // function that generates options on initial page load and when bookTitiles array changes
 function createAndAttachOptions() {
     var spanElementsCollection = [];
