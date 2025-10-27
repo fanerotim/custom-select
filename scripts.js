@@ -42,3 +42,37 @@ function submitFormHandler(e) {
     // log value of selected option - it is basically the textContent of customSelectElement
     console.log(customSelectElement.textContent);
 }
+
+// array that holds book titles that will be used in the different options
+const bookTitles = [
+    'Anima', 
+    'Border', 
+    'To the Lake', 
+    'Elixir', 
+    'Out of Thin Air', 
+    'The Sweet Soirt', 
+    'It`s not about the bike', 
+    'Perfume',
+    'On the road',
+    'Glue'
+];
+
+// function that generates options on initial page load and when bookTitiles array changes
+function createAndAttachOptions() {
+    
+    const spanElementsCollection = [];
+
+    bookTitles.forEach(bookTitle => {
+        const spanElement = document.createElement('span');
+        spanElement.textContent = bookTitle;
+        spanElement.className = 'option';
+        spanElementsCollection.push(spanElement);
+    })
+
+    spanElementsCollection.forEach(span => {
+        customOptionsWrapper.appendChild(span);
+    })
+}
+
+// add all options on documet load
+document.addEventListener('DOMContentLoaded', createAndAttachOptions);
