@@ -5,7 +5,7 @@ const customSelectBtn = document.querySelector('.custom__select');
 customSelectBtn?.addEventListener('click', customSelectClickHandler)
 
 // get custom options wrapper
-const customOptionsWrapper = document.querySelector('.options__wrapper');
+const customOptionsWrapper = document.querySelector('.options__wrapper') as HTMLElement;
 
 // function that handles open and close state of custom select
 function customSelectClickHandler() {
@@ -14,15 +14,15 @@ function customSelectClickHandler() {
 }
 
 // custom__select paragraph
-let customSelectElement = document.querySelector('.custom__select');
+let customSelectElement = document.querySelector('.custom__select') as HTMLElement;
 
 // use event delegation approach to only add one event listener to wrapper
 customOptionsWrapper?.addEventListener('click', handleOptionChange);
 
 // change custom select value upon option change
-function handleOptionChange(e) {
+function handleOptionChange(e: Event) {
     // identify the current option by checking e.target (thanks to event delegation)
-    const currentOption = e.target;
+    const currentOption = e.target as HTMLElement;
     // update custom select text with the text of the custom option
     customSelectElement.textContent = currentOption.textContent;
     // call customSelectClickHandler to close the option list
@@ -37,7 +37,7 @@ const formSubmitButton = document.querySelector('.submit__btn');
 // add event listener to the submit button
 formSubmitButton?.addEventListener('click', submitFormHandler)
 
-function submitFormHandler(e) {
+function submitFormHandler(e: Event) {
     e.preventDefault();
     // log value of selected option - it is basically the textContent of customSelectElement
     console.log(customSelectElement.textContent);
@@ -60,7 +60,7 @@ const bookTitles = [
 // function that generates options on initial page load and when bookTitiles array changes
 function createAndAttachOptions() {
     
-    const spanElementsCollection = [];
+    const spanElementsCollection: HTMLSpanElement[] = [];
 
     bookTitles.forEach(bookTitle => {
         const spanElement = document.createElement('span');
