@@ -31,6 +31,10 @@ span {
     display: block;
 }
 
+.custom__select__wrapper {
+    position: relative;
+}
+
 .custom__select {
     padding: .5rem 1rem;
     margin: 0;
@@ -39,7 +43,6 @@ span {
     color: white;
     font-size: .8rem;
     cursor: pointer;
-    position: relative;
 }
 
 .arrow__down {
@@ -49,6 +52,7 @@ span {
     border-top: 10px solid white;
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
+    display:block;
 }
 
 .arrow__up {

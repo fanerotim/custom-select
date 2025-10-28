@@ -12,21 +12,24 @@ const bookTitles = [
     'Glue'
 ];
 
-// get custom select element
-const customSelectBtn = document.querySelector('.custom__select');
+// get wrapper of custom select options
+const customSelectWrapper = document.querySelector<HTMLDivElement>('.custom__select__wrapper');
 
 // add event listener to custom select element, so we can show hide the options
-customSelectBtn?.addEventListener('click', customSelectClickHandler)
+customSelectWrapper?.addEventListener('click', customSelectClickHandler)
 
 // get custom options wrapper
-const customOptionsWrapper = document.querySelector<HTMLElement>('.options__wrapper');
+const customOptionsWrapper = document.querySelector<HTMLDivElement>('.options__wrapper');
 
-const arrowUpElement = document.querySelector<HTMLSpanElement>('.arrow__up');
-const arrowDownElement = document.querySelector<HTMLSpanElement>('.arrow__down');
+const arrowUpElement = document.querySelector<HTMLSpanElement>('.arrow__up')!; // add not-null operator to avoid conditional checks - element is hardcoded in html
+const arrowDownElement = document.querySelector<HTMLSpanElement>('.arrow__down')!; // add not-null operator to avoid conditional checks - element is hardcoded in html
 
 // function that handles open and close state of custom select
-function customSelectClickHandler() {
-
+function customSelectClickHandler(e: Event) {
+    // stopping propagation, so when I select an option the dropdown can close automatically
+    // it was a nice bug i caught after debugging for some time
+    // there are event listeners in both options__wrapper and custom__select__wrapper, and each has an event listener, so we need to stop propagation in order for the drop down to close, else it is opened / closed very quickly, so it never closes when you select an option
+    e.stopPropagation();
     if (!customOptionsWrapper) {
         throw Error('Options Wrapper does not exist!');
     }
@@ -35,33 +38,33 @@ function customSelectClickHandler() {
     customOptionsWrapper.classList.toggle('show')
 
     if (customOptionsWrapper.classList.contains('show')) {
-        arrowUpElement!.style.display = 'inline-block';
-        arrowDownElement!.style.display = 'none'
+        arrowUpElement.style.display = 'block';
+        arrowDownElement.style.display = 'none';
     } else {
-        arrowUpElement!.style.display = 'none';
-        arrowDownElement!.style.display = 'inline-block'
+        arrowDownElement.style.display = 'block';
+        arrowUpElement.style.display = 'none';
     }
 }
 
 // custom__select paragraph
-let customSelectElement = document.querySelector<HTMLElement>('.custom__select');
+let customSelectParagraph = document.querySelector<HTMLParagraphElement>('.custom__select');
 
 // use event delegation approach to only add one event listener to wrapper
 customOptionsWrapper?.addEventListener('click', handleOptionChange);
 
 // change custom select value upon option change
 function handleOptionChange(e: Event) {
-
-    if (!customSelectElement) {
+    
+    if (!customSelectParagraph) {
         throw Error('Custom Select element does not exist!');
     }
 
     // identify the current option by checking e.target (thanks to event delegation)
     const currentOption = e.target as HTMLSpanElement;
     // update custom select text with the text of the custom option
-    customSelectElement.textContent = currentOption.textContent;
+    customSelectParagraph.textContent = currentOption.textContent;
     // call customSelectClickHandler to close the option list
-    customSelectClickHandler();
+    customSelectClickHandler(e);
 }
 
 // handle form submission
@@ -75,11 +78,11 @@ formSubmitButton?.addEventListener('click', submitFormHandler)
 function submitFormHandler(e: Event) {
     e.preventDefault();
 
-    if (!customSelectElement) {
+    if (!customSelectParagraph) {
         throw Error('Custom Select Element does not exist!');
     }
     // log value of selected option - it is basically the textContent of customSelectElement
-    console.log(customSelectElement.textContent);
+    console.log(customSelectParagraph.textContent);
 }
 
 // function that generates options on initial page load and when bookTitiles array changes
