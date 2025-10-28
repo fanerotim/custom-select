@@ -9,7 +9,9 @@ const bookTitles = [
     'It`s not about the bike',
     'Perfume',
     'On the road',
-    'Glue'
+    'Glue',
+    'Cloud Atlas',
+    'The Castle'
 ];
 
 // get wrapper of custom select options

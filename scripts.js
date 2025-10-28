@@ -9,7 +9,9 @@ var bookTitles = [
     'It`s not about the bike',
     'Perfume',
     'On the road',
-    'Glue'
+    'Glue',
+    'Cloud Atlas',
+    'The Castle'
 ];
 // get wrapper of custom select options
 var customSelectWrapper = document.querySelector('.custom__select__wrapper');

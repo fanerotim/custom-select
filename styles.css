@@ -38,7 +38,7 @@ span {
 .custom__select {
     padding: .5rem 1rem;
     margin: 0;
-    border-radius: .5rem;
+    /* border-radius: .5rem; */
     background-color: black;
     color: white;
     font-size: .8rem;
@@ -53,6 +53,7 @@ span {
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
     display:block;
+    cursor: pointer;
 }
 
 .arrow__up {
@@ -63,14 +64,15 @@ span {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     display: none;
+    cursor: pointer;
 }
 
 .options__wrapper {
-    padding: .5rem 1.2rem;
-    height: 80px;
+    /* padding: .2rem 0; */
+    height: 120px;
     overflow-y: scroll;
-    border-radius: .5rem;
-    background-color: beige;
+    /* border-radius: .5rem; */
+    background-color: rgb(243, 243, 238);
     visibility: hidden;
     opacity: 0;
     /* visibility's transition is longer to make sure the dropdown is hidden before it makes it impossible to interact with */
@@ -80,21 +82,36 @@ span {
     transition: opacity .3s, height .1s; */
 }
 
+.options__wrapper::-webkit-scrollbar {
+    width: 10px;
+}
+
+.options__wrapper::-webkit-scrollbar-track {
+    background-color: rgb(26, 25, 25);
+}
+
+.options__wrapper::-webkit-scrollbar-thumb {
+    background-color: rgb(156, 156, 156);
+    height: 5px;
+}
+
 .option {
     cursor: pointer;
     padding: .2rem 1rem;
-    border-radius: .5rem;
+    /* border-radius: .5rem; */
+    font-size: .9rem;
 }
 
 .option:hover {
-    background-color: rgb(243, 243, 243);
+    background-color: rgb(39, 39, 39);
+    color: white;
 }
 
-.option:hover::before {
+/* .option:hover::before {
     content: '✓';
     padding-right: .2rem;
     color: green;
-}
+} */
 
 .show {
     visibility: visible;
