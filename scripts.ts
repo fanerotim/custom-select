@@ -63,6 +63,7 @@ function handleOptionChange(e: Event) {
 
     // identify the current option by checking e.target (thanks to event delegation)
     const currentOption = e.target as HTMLSpanElement;
+  
     // update custom select text with the text of the custom option
     customSelectParagraph.textContent = currentOption.textContent;
     // call customSelectClickHandler to close the option list

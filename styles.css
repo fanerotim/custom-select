@@ -19,10 +19,23 @@ body {
     display: grid;
     gap: 1rem;
     width: 200px;
+    background-color: rgb(227, 255, 252);
+    border-radius: .5rem;
+    padding: 1rem 2rem;
 }
 
 .submit__btn {
+    all: unset;
+    cursor: pointer;
+    background-color: rgb(39, 39, 39);
+    color: white;
+    text-align: center;
+    padding: .5rem .9rem;
+    font-size: .8rem;
     margin-top: 1rem;
+    width: fit-content;
+    justify-self: end;
+    border-radius: .2rem;
 }
 
 /* custom select styles */
@@ -38,8 +51,9 @@ span {
 .custom__select {
     padding: .5rem 1rem;
     margin: 0;
-    /* border-radius: .5rem; */
-    background-color: black;
+    border-top-left-radius: .2rem;
+    border-top-right-radius: .2rem;
+    background-color: rgb(39, 39, 39);
     color: white;
     font-size: .8rem;
     cursor: pointer;
@@ -72,7 +86,7 @@ span {
     height: 120px;
     overflow-y: scroll;
     /* border-radius: .5rem; */
-    background-color: rgb(243, 243, 238);
+    background-color: rgb(255, 255, 255);
     visibility: hidden;
     opacity: 0;
     /* visibility's transition is longer to make sure the dropdown is hidden before it makes it impossible to interact with */
@@ -91,7 +105,7 @@ span {
 }
 
 .options__wrapper::-webkit-scrollbar-thumb {
-    background-color: rgb(156, 156, 156);
+    background-color: rgb(196, 196, 196);
     height: 5px;
 }
 
