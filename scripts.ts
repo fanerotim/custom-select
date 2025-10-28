@@ -35,11 +35,14 @@ function customSelectClickHandler(e: Event) {
     if (!customOptionsWrapper) {
         throw Error('Options Wrapper does not exist!');
     }
-    
+
     // toggle 'show' class to show / hide the select options
     customOptionsWrapper.classList.toggle('show')
 
     if (customOptionsWrapper.classList.contains('show')) {
+        // call function that will show checkbox (or other marker) to indicate selected option
+        indicateSelectedOption(e);
+        // function that handles checkbox insertion for the selected custom option
         arrowUpElement.style.display = 'block';
         arrowDownElement.style.display = 'none';
     } else {
@@ -56,14 +59,14 @@ customOptionsWrapper?.addEventListener('click', handleOptionChange);
 
 // change custom select value upon option change
 function handleOptionChange(e: Event) {
-    
+
     if (!customSelectParagraph) {
         throw Error('Custom Select element does not exist!');
     }
 
     // identify the current option by checking e.target (thanks to event delegation)
     const currentOption = e.target as HTMLSpanElement;
-  
+
     // update custom select text with the text of the custom option
     customSelectParagraph.textContent = currentOption.textContent;
     // call customSelectClickHandler to close the option list
@@ -94,12 +97,37 @@ function createAndAttachOptions() {
     const spanElementsCollection: HTMLSpanElement[] = [];
 
     bookTitles.forEach(bookTitle => {
+        // option container - will be used to wrap the span as I will add an input[type='checkbox'] that will show the currently selected input
+        const optionContainer = document.createElement('div');
+        optionContainer.className = 'option__container';
+        optionContainer.style.display = 'flex';
+        optionContainer.style.justifyContent = 'space-between';
+        optionContainer.style.position = 'relative';
+        
+        // span element
         const spanElement = document.createElement('span');
         spanElement.textContent = bookTitle;
         spanElement.className = 'option';
-        spanElementsCollection.push(spanElement);
-    })
+        spanElement.style.width = '100%';
 
+        // input[type='checkbox'] that shows the currently selected input
+        const inputElement = document.createElement('input');
+        inputElement.setAttribute('type', 'checkbox');
+        inputElement.setAttribute('checked', 'true');
+        inputElement.style.width = 'fit-content';
+        inputElement.style.position = 'absolute';
+        inputElement.style.right = '2px';
+        inputElement.style.top = '2px';
+        inputElement.style.color = 'black';
+        inputElement.style.backgroundColor = 'black';
+        inputElement.style.display = 'none';
+
+        optionContainer.append(spanElement);
+        optionContainer.append(inputElement)
+
+        spanElementsCollection.push(optionContainer);
+    })
+    
     spanElementsCollection.forEach(span => {
 
         if (!customOptionsWrapper) {
@@ -111,3 +139,8 @@ function createAndAttachOptions() {
 
 // add all options on documet load
 document.addEventListener('DOMContentLoaded', createAndAttachOptions);
+
+// fn that will set display prop of selected option's input[type='checkbox'] to block (show the checkbox to indicate which option is selected)
+function indicateSelectedOption(e: Event) {
+    console.log(window);
+}

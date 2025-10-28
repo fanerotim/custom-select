@@ -33,6 +33,9 @@ function customSelectClickHandler(e) {
     // toggle 'show' class to show / hide the select options
     customOptionsWrapper.classList.toggle('show');
     if (customOptionsWrapper.classList.contains('show')) {
+        // call function that will show checkbox (or other marker) to indicate selected option
+        indicateSelectedOption(e);
+        // function that handles checkbox insertion for the selected custom option
         arrowUpElement.style.display = 'block';
         arrowDownElement.style.display = 'none';
     }
@@ -74,10 +77,31 @@ function submitFormHandler(e) {
 function createAndAttachOptions() {
     var spanElementsCollection = [];
     bookTitles.forEach(function (bookTitle) {
+        // option container - will be used to wrap the span as I will add an input[type='checkbox'] that will show the currently selected input
+        var optionContainer = document.createElement('div');
+        optionContainer.className = 'option__container';
+        optionContainer.style.display = 'flex';
+        optionContainer.style.justifyContent = 'space-between';
+        optionContainer.style.position = 'relative';
+        // span element
         var spanElement = document.createElement('span');
         spanElement.textContent = bookTitle;
         spanElement.className = 'option';
-        spanElementsCollection.push(spanElement);
+        spanElement.style.width = '100%';
+        // input[type='checkbox'] that shows the currently selected input
+        var inputElement = document.createElement('input');
+        inputElement.setAttribute('type', 'checkbox');
+        inputElement.setAttribute('checked', 'true');
+        inputElement.style.width = 'fit-content';
+        inputElement.style.position = 'absolute';
+        inputElement.style.right = '2px';
+        inputElement.style.top = '2px';
+        inputElement.style.color = 'black';
+        inputElement.style.backgroundColor = 'black';
+        inputElement.style.display = 'none';
+        optionContainer.append(spanElement);
+        optionContainer.append(inputElement);
+        spanElementsCollection.push(optionContainer);
     });
     spanElementsCollection.forEach(function (span) {
         if (!customOptionsWrapper) {
@@ -88,3 +112,7 @@ function createAndAttachOptions() {
 }
 // add all options on documet load
 document.addEventListener('DOMContentLoaded', createAndAttachOptions);
+// fn that will set display prop of selected option's input[type='checkbox'] to block (show the checkbox to indicate which option is selected)
+function indicateSelectedOption(e) {
+    console.log(window);
+}

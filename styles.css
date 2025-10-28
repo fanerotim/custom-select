@@ -4,6 +4,7 @@ body {
     flex-direction: column;
     gap: 5rem;
     align-items: center;
+    background-color: rgb(251, 253, 255);
 }
 
 .heading {
