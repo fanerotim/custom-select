@@ -114,15 +114,25 @@ function createAndAttachOptions() {
 document.addEventListener('DOMContentLoaded', createAndAttachOptions);
 // fn that will set display prop of selected option's input[type='checkbox'] to block (show the checkbox to indicate which option is selected)
 function indicateSelectedOption(e) {
+    // get the text of the currently selected option, so I can then find the actual span element by comparing its text
     var textOfCurrentlySelectedOption = customSelectParagraph === null || customSelectParagraph === void 0 ? void 0 : customSelectParagraph.textContent;
+    // get all options in a NodeList
     var optionElementsNodeList = document.querySelectorAll('.option');
+    // loop through the NodeList to find the selected option
     var selectedOption = optionElementsNodeList.forEach(function (option) {
-        var _a, _b;
         if (option.textContent == textOfCurrentlySelectedOption) {
-            (_a = option.parentElement) === null || _a === void 0 ? void 0 : _a.children[1].style.display = 'block';
+            // get parent element - it my case, this is a div wrapper
+            var parentDivElement = option.parentElement;
+            // get the input[type='checkbox'], so we can display it
+            var inputElement = parentDivElement.children[1]; // i know it has children as they are hardcoded in html, so using not-null operator
+            // finally, display the input
+            inputElement.style.display = 'block';
         }
         else {
-            (_b = option.parentElement) === null || _b === void 0 ? void 0 : _b.children[1].style.display = 'none';
+            // make sure previously selected option resets display prop of its input, so it is not visibile
+            var parentDivElement = option.parentElement;
+            var prevInput = parentDivElement.children[1]; // i know the parent cannot be null as it's hardcoded
+            prevInput.style.display = 'none';
         }
     });
 }
