@@ -127,12 +127,16 @@ function indicateSelectedOption(e) {
             var inputElement = parentDivElement.children[1]; // i know it has children as they are hardcoded in html, so using not-null operator
             // finally, display the input
             inputElement.style.display = 'block';
+            // change background-color of currently selected option
+            option.style.backgroundColor = 'grey';
         }
         else {
             // make sure previously selected option resets display prop of its input, so it is not visibile
             var parentDivElement = option.parentElement;
             var prevInput = parentDivElement.children[1]; // i know the parent cannot be null as it's hardcoded
             prevInput.style.display = 'none';
+            // reset background-color of previously currently selected option
+            option.style.backgroundColor = 'transparent';
         }
     });
 }
