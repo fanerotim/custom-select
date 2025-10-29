@@ -119,6 +119,7 @@ span {
 
 .option:hover {
     font-weight: bold;
+    transition: font-weight .2s;
     /* color: white; */
 }
 
@@ -146,7 +147,8 @@ input[type='checkbox'] {
     z-index: -1;
 }
 
-input[type='checkbox']::after {
+/* not needed for now and likely will be deleted as new approach for now in my mind is to have another element with ::before style */
+/* input[type='checkbox']::after {
     content: '\f00c';
     font-family: "Font Awesome 7 Free";
     font-weight: 900;
@@ -155,7 +157,7 @@ input[type='checkbox']::after {
     right: 0;
     width: fit-content;
     z-index: -1;
-}
+} */
 
 input[type='checkbox']:hover {
     background-color: white;

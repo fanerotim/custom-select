@@ -1,3 +1,6 @@
+// add all options on documet load
+document.addEventListener('DOMContentLoaded', createAndAttachOptions);
+
 // array that holds book titles that will be used in the different options
 const bookTitles = [
     'Anima',
@@ -136,9 +139,6 @@ function createAndAttachOptions() {
         customOptionsWrapper.appendChild(span);
     })
 }
-
-// add all options on documet load
-document.addEventListener('DOMContentLoaded', createAndAttachOptions);
 
 // fn that will set display prop of selected option's input[type='checkbox'] to block (show the checkbox to indicate which option is selected)
 function indicateSelectedOption(e: Event) {
