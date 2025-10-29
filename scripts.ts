@@ -142,5 +142,14 @@ document.addEventListener('DOMContentLoaded', createAndAttachOptions);
 
 // fn that will set display prop of selected option's input[type='checkbox'] to block (show the checkbox to indicate which option is selected)
 function indicateSelectedOption(e: Event) {
-    console.log(window);
+    const textOfCurrentlySelectedOption = customSelectParagraph?.textContent;
+
+    const optionElementsNodeList = document.querySelectorAll('.option');
+    const selectedOption = optionElementsNodeList.forEach((option) => {
+        if (option.textContent == textOfCurrentlySelectedOption) {
+            option.parentElement?.children[1].style.display = 'block';
+        } else {
+            option.parentElement?.children[1].style.display = 'none';
+        }
+    })
 }

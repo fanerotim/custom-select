@@ -114,5 +114,15 @@ function createAndAttachOptions() {
 document.addEventListener('DOMContentLoaded', createAndAttachOptions);
 // fn that will set display prop of selected option's input[type='checkbox'] to block (show the checkbox to indicate which option is selected)
 function indicateSelectedOption(e) {
-    console.log(window);
+    var textOfCurrentlySelectedOption = customSelectParagraph === null || customSelectParagraph === void 0 ? void 0 : customSelectParagraph.textContent;
+    var optionElementsNodeList = document.querySelectorAll('.option');
+    var selectedOption = optionElementsNodeList.forEach(function (option) {
+        var _a, _b;
+        if (option.textContent == textOfCurrentlySelectedOption) {
+            (_a = option.parentElement) === null || _a === void 0 ? void 0 : _a.children[1].style.display = 'block';
+        }
+        else {
+            (_b = option.parentElement) === null || _b === void 0 ? void 0 : _b.children[1].style.display = 'none';
+        }
+    });
 }
