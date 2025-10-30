@@ -120,14 +120,7 @@ span {
 .option:hover {
     font-weight: bold;
     transition: font-weight .2s;
-    /* color: white; */
 }
-
-/* .option:hover::before {
-    content: '✓';
-    padding-right: .2rem;
-    color: green;
-} */
 
 .show {
     visibility: visible;
@@ -141,24 +134,27 @@ span {
 } */
 
 input[type='checkbox'] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: -1;
+    visibility: hidden;
+    opacity: 0;
+    z-index: -20;
+    /* position: absolute;
+    top: -200;
+    right: -200;
+    z-index: -1; */
 }
 
-/* not needed for now and likely will be deleted as new approach for now in my mind is to have another element with ::before style */
-/* input[type='checkbox']::after {
+.icon__container {
+    display: none;
+}
+
+.icon__container::after {
     content: '\f00c';
     font-family: "Font Awesome 7 Free";
     font-weight: 900;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 20%;
+    right: 10px;
     width: fit-content;
-    z-index: -1;
-} */
-
-input[type='checkbox']:hover {
-    background-color: white;
+    justify-self: center;
+    color: green;
 }

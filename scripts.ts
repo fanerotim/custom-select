@@ -67,6 +67,11 @@ function handleOptionChange(e: Event) {
         throw Error('Custom Select element does not exist!');
     }
 
+    // if user clicks on icon__container span - return. this span is merely used to show font-awesome icon, so it has no text and it breaks the custom select; to fix that bug we just return
+    if (e.target.classList.contains('icon__container')) {
+        return
+    }
+
     // identify the current option by checking e.target (thanks to event delegation)
     const currentOption = e.target as HTMLSpanElement;
 
@@ -105,6 +110,7 @@ function createAndAttachOptions() {
         optionContainer.className = 'option__container';
         optionContainer.style.display = 'flex';
         optionContainer.style.justifyContent = 'space-between';
+        optionContainer.style.alignItems = 'center';
         optionContainer.style.position = 'relative';
         
         // span element
@@ -112,6 +118,10 @@ function createAndAttachOptions() {
         spanElement.textContent = bookTitle;
         spanElement.className = 'option';
         spanElement.style.width = '100%';
+
+        // icon container - span
+        const iconContainerSpan = document.createElement('span');
+        iconContainerSpan.className = 'icon__container';
 
         // input[type='checkbox'] that shows the currently selected input
         const inputElement = document.createElement('input');
@@ -126,7 +136,8 @@ function createAndAttachOptions() {
         inputElement.style.display = 'none';
 
         optionContainer.append(spanElement);
-        optionContainer.append(inputElement)
+        optionContainer.append(inputElement);
+        optionContainer.append(iconContainerSpan);
 
         spanElementsCollection.push(optionContainer);
     })
@@ -150,6 +161,7 @@ function indicateSelectedOption(e: Event) {
     
     // loop through the NodeList to find the selected option
     const selectedOption = optionElementsNodeList.forEach((option) => {
+        
         if (option.textContent == textOfCurrentlySelectedOption) {
             // get parent element - it my case, this is a div wrapper
             const parentDivElement = <HTMLDivElement>option.parentElement;
@@ -158,8 +170,13 @@ function indicateSelectedOption(e: Event) {
             // finally, display the input
             inputElement.style.display = 'block';
 
+            //font-awesome icon container
+            const iconContainerSpan = <HTMLSpanElement>parentDivElement.children[2];
+            // show font-awesome icon, which is a check for the custom option that is selected
+            iconContainerSpan.style.display = 'block';
+       
             // change background-color of currently selected option
-            option.style.backgroundColor = 'grey'
+            option.style.backgroundColor = 'rgba(240, 240, 240)'
         } else {
             // make sure previously selected option resets display prop of its input, so it is not visibile
             const parentDivElement = <HTMLDivElement>option.parentElement;
@@ -167,6 +184,10 @@ function indicateSelectedOption(e: Event) {
             prevInput.style.display = 'none';
             // reset background-color of previously currently selected option
             option.style.backgroundColor = 'transparent';
+
+            //and also hide the checkmark option by changing its display prop / hiding it
+            const iconContainerSpan = <HTMLSpanElement>parentDivElement.children[2];
+            iconContainerSpan.style.display = 'none';
         }
     })
 }

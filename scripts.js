@@ -55,6 +55,10 @@ function handleOptionChange(e) {
     if (!customSelectParagraph) {
         throw Error('Custom Select element does not exist!');
     }
+    // if user clicks on icon__container span - return. this span is merely used to show font-awesome icon, so it has no text and it breaks the custom select; to fix that bug we just return
+    if (e.target.classList.contains('icon__container')) {
+        return;
+    }
     // identify the current option by checking e.target (thanks to event delegation)
     var currentOption = e.target;
     // update custom select text with the text of the custom option
@@ -84,12 +88,16 @@ function createAndAttachOptions() {
         optionContainer.className = 'option__container';
         optionContainer.style.display = 'flex';
         optionContainer.style.justifyContent = 'space-between';
+        optionContainer.style.alignItems = 'center';
         optionContainer.style.position = 'relative';
         // span element
         var spanElement = document.createElement('span');
         spanElement.textContent = bookTitle;
         spanElement.className = 'option';
         spanElement.style.width = '100%';
+        // icon container - span
+        var iconContainerSpan = document.createElement('span');
+        iconContainerSpan.className = 'icon__container';
         // input[type='checkbox'] that shows the currently selected input
         var inputElement = document.createElement('input');
         inputElement.setAttribute('type', 'checkbox');
@@ -103,6 +111,7 @@ function createAndAttachOptions() {
         inputElement.style.display = 'none';
         optionContainer.append(spanElement);
         optionContainer.append(inputElement);
+        optionContainer.append(iconContainerSpan);
         spanElementsCollection.push(optionContainer);
     });
     spanElementsCollection.forEach(function (span) {
@@ -127,8 +136,12 @@ function indicateSelectedOption(e) {
             var inputElement = parentDivElement.children[1]; // i know it has children as they are hardcoded in html, so using not-null operator
             // finally, display the input
             inputElement.style.display = 'block';
+            //font-awesome icon container
+            var iconContainerSpan = parentDivElement.children[2];
+            // show font-awesome icon, which is a check for the custom option that is selected
+            iconContainerSpan.style.display = 'block';
             // change background-color of currently selected option
-            option.style.backgroundColor = 'grey';
+            option.style.backgroundColor = 'rgba(240, 240, 240)';
         }
         else {
             // make sure previously selected option resets display prop of its input, so it is not visibile
@@ -137,6 +150,9 @@ function indicateSelectedOption(e) {
             prevInput.style.display = 'none';
             // reset background-color of previously currently selected option
             option.style.backgroundColor = 'transparent';
+            //and also hide the checkmark option by changing its display prop / hiding it
+            var iconContainerSpan = parentDivElement.children[2];
+            iconContainerSpan.style.display = 'none';
         }
     });
 }
